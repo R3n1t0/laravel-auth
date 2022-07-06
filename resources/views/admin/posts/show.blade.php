@@ -11,7 +11,7 @@
         <button class="btn btn-danger" type="submit">CANCELLA</button>
     </form>
 
-    <a href="{{ route('admin.index')}}"><< Torna</a>
+    <a href="{{ route('admin.post.index')}}"><< Torna</a>
 
 </div>
 @endsection
