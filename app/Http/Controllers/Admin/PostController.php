@@ -60,7 +60,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Posts::find($id);
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -81,8 +82,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Posts $post)
     {
-        //
+        $post -> delete();
+        return redirect('admin.posts.index');
     }
 }
