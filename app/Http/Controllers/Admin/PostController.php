@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Posts;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         $data = $request->all();
         $new_post = new Posts();
@@ -43,7 +44,7 @@ class PostController extends Controller
         $new_post->fill($data);
         $new_post->save();
 
-        return redirect()->route('admin.post.index');
+        return redirect()->route('admin.post.show', $new_post);
 
     }
 
@@ -78,9 +79,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, Posts $post)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Posts::generateSlug($data['title']);
+        $post->update($data);
+
+        return redirect()->route('admin.post.show', $post);
+
     }
 
     /**
@@ -92,6 +98,6 @@ class PostController extends Controller
     public function destroy(Posts $post)
     {
         $post -> delete();
-        return redirect('admin.posts.index');
+        return redirect()->route('admin.post.index');
     }
 }
