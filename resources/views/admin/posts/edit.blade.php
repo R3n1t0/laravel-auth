@@ -28,8 +28,8 @@
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">Contenuto</label>
-            <textarea class="form-control @error('title') is-invalid @enderror"  name="content" id="content" cols="30" rows="10">{{ old('content'), $post->content }}</textarea>
-            @error('title')
+            <textarea class="form-control @error('content') is-invalid @enderror"  name="content" id="content" cols="30" rows="10">{{ old('content'), $post->content }}</textarea>
+            @error('content')
                 <p>{{$message}}</p>
             @enderror
         </div>
